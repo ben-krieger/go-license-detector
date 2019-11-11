@@ -4,5 +4,6 @@ package api
 // and a mapping of files to confidence.
 type Match struct {
 	Files      map[string]float32
+	FullText   []byte
 	Confidence float32
 }

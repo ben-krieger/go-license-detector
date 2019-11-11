@@ -41,6 +41,7 @@ type Result struct {
 // Match describes the level of confidence for the detected License
 type Match struct {
 	License    string  `json:"license"`
+	FullText   string  `json:"license_text"`
 	Confidence float32 `json:"confidence"`
 }
 
@@ -67,7 +68,7 @@ func process(arg string) ([]Match, error) {
 
 	var matches []Match
 	for k, v := range ls {
-		matches = append(matches, Match{k, v.Confidence})
+		matches = append(matches, Match{k, string(v.FullText), v.Confidence})
 	}
 	sort.Slice(matches, func(i, j int) bool { return matches[i].Confidence > matches[j].Confidence })
 	return matches, nil
